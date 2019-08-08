@@ -518,6 +518,9 @@
 		5E9288CA22DF864C007BE7A6 /* TabSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9288C922DF864C007BE7A6 /* TabSessionTests.swift */; };
 		5EB57D0222FDC0CB00A07325 /* FullscreenHelper.js in Resources */ = {isa = PBXBuildFile; fileRef = 5EB57D0122FDC0CB00A07325 /* FullscreenHelper.js */; };
 		5EB57C2622FB1B3700A07325 /* GSafeBrowsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB57C2522FB1B3700A07325 /* GSafeBrowsing.swift */; };
+		5EB57CBF22FC77F200A07325 /* GSafeBrowsingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB57CBE22FC77F200A07325 /* GSafeBrowsingModels.swift */; };
+		5EB57CC822FC793100A07325 /* GSafeBrowsingDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB57CC722FC793100A07325 /* GSafeBrowsingDatabase.swift */; };
+		5EB57CCC22FC7BD000A07325 /* SafeBrowsing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EB57CCA22FC7BD000A07325 /* SafeBrowsing.xcdatamodeld */; };
 		744B0FFE1B4F172E00100422 /* ToolbarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744B0FFD1B4F172E00100422 /* ToolbarTests.swift */; };
 		744ED5611DBFEB8D00A2B5BE /* MailtoLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744ED5601DBFEB8D00A2B5BE /* MailtoLinkHandler.swift */; };
 		7479B4EF1C5306A200DF000B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479B4ED1C5306A200DF000B /* Reachability.swift */; };
@@ -1881,6 +1884,9 @@
 		5E9288C922DF864C007BE7A6 /* TabSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSessionTests.swift; sourceTree = "<group>"; };
 		5EB57D0122FDC0CB00A07325 /* FullscreenHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = FullscreenHelper.js; sourceTree = "<group>"; };
 		5EB57C2522FB1B3700A07325 /* GSafeBrowsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSafeBrowsing.swift; sourceTree = "<group>"; };
+		5EB57CBE22FC77F200A07325 /* GSafeBrowsingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSafeBrowsingModels.swift; sourceTree = "<group>"; };
+		5EB57CC722FC793100A07325 /* GSafeBrowsingDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSafeBrowsingDatabase.swift; sourceTree = "<group>"; };
+		5EB57CCB22FC7BD000A07325 /* SafeBrowsing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SafeBrowsing.xcdatamodel; sourceTree = "<group>"; };
 		744B0FFD1B4F172E00100422 /* ToolbarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarTests.swift; sourceTree = "<group>"; };
 		744ED5601DBFEB8D00A2B5BE /* MailtoLinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailtoLinkHandler.swift; sourceTree = "<group>"; };
 		7479B4ED1C5306A200DF000B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ThirdParty/Reachability.swift; sourceTree = "<group>"; };
@@ -3424,6 +3430,17 @@
 			path = BraveSharedTests;
 			sourceTree = "<group>";
 		};
+		5EB57CC922FC7B9B00A07325 /* SafeBrowsing */ = {
+			isa = PBXGroup;
+			children = (
+				5EB57C2522FB1B3700A07325 /* GSafeBrowsing.swift */,
+				5EB57CBE22FC77F200A07325 /* GSafeBrowsingModels.swift */,
+				5EB57CC722FC793100A07325 /* GSafeBrowsingDatabase.swift */,
+				5EB57CCA22FC7BD000A07325 /* SafeBrowsing.xcdatamodeld */,
+			);
+			path = SafeBrowsing;
+			sourceTree = "<group>";
+		};
 		7B0B1B9C1C1B69F500DF4AB5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3820,7 +3837,6 @@
 				279C756A219DDE3B001CD1CB /* FingerprintingProtection.swift */,
 				5E34780F22D7A1D200B0D5F8 /* ResourceDownloadManager.swift */,
 				5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */,
-				5EB57C2522FB1B3700A07325 /* GSafeBrowsing.swift */,
 			);
 			indentWidth = 4;
 			path = Browser;
@@ -4152,6 +4168,7 @@
 				F84B21F11A0910F600AAB793 /* Frontend */,
 				39A359BD1BFCCE7B006B9E87 /* Helpers */,
 				0A4BEFCD221E11440005551A /* Networking */,
+				5EB57CC922FC7B9B00A07325 /* SafeBrowsing */,
 				0A0D3D2F21A4BC1F00BEE65B /* WebFilters */,
 				E65075551E37F714006961AC /* Utils */,
 				74821FFD1DB6D3AC00EEEA72 /* MailSchemes.plist */,
@@ -5689,6 +5706,7 @@
 				31ADB5DA1E58CEC300E87909 /* ClipboardBarDisplayHandler.swift in Sources */,
 				0A4B012020D02EC4004D4011 /* TabsBarViewController.swift in Sources */,
 				4422D4D921BFFB7600BF1855 /* merger.cc in Sources */,
+				5EB57CBF22FC77F200A07325 /* GSafeBrowsingModels.swift in Sources */,
 				4422D4EF21BFFB7600BF1855 /* log_reader.cc in Sources */,
 				A1D8420420BC44F800BDAFF7 /* PopoverContentComponent.swift in Sources */,
 				A1D8420220BC44F800BDAFF7 /* PopoverController.swift in Sources */,
@@ -5734,6 +5752,7 @@
 				0A43293B21B1C8D10041625B /* FifoDict.swift in Sources */,
 				FA6B2AC21D41F02D00429414 /* Punycode.swift in Sources */,
 				D301AAEE1A3A55B70078DD1D /* TabTrayController.swift in Sources */,
+				5EB57CCC22FC7BD000A07325 /* SafeBrowsing.xcdatamodeld in Sources */,
 				0A7B5D702269E72C00AADF22 /* BookmarkSaveLocation.swift in Sources */,
 				0B3E7D951B27A7CE00E2E84D /* AboutHomeHandler.swift in Sources */,
 				0AADC4CA20D2A66E00FDE368 /* FavoriteCell.swift in Sources */,
@@ -5984,6 +6003,7 @@
 				4422D56621BFFB7F00BF1855 /* tostring.cc in Sources */,
 				4422D54821BFFB7E00BF1855 /* pcre.cc in Sources */,
 				C8F457AA1F1FDD9B000CB895 /* BrowserViewController+KeyCommands.swift in Sources */,
+				5EB57CC822FC793100A07325 /* GSafeBrowsingDatabase.swift in Sources */,
 				E40FAB0C1A7ABB77009CB80D /* WebServer.swift in Sources */,
 				4422D54C21BFFB7E00BF1855 /* strutil.cc in Sources */,
 				59A68D66379CFA85C4EAF00B /* TwoLineCell.swift in Sources */,
@@ -9806,6 +9826,16 @@
 			);
 			currentVersion = 27D922B221C9830F00345BF3 /* Model9.xcdatamodel */;
 			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		5EB57CCA22FC7BD000A07325 /* SafeBrowsing.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5EB57CCB22FC7BD000A07325 /* SafeBrowsing.xcdatamodel */,
+			);
+			currentVersion = 5EB57CCB22FC7BD000A07325 /* SafeBrowsing.xcdatamodel */;
+			path = SafeBrowsing.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
