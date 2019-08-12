@@ -2951,6 +2951,29 @@ extension BrowserViewController: PreferencesObserver {
             setupTabs()
             updateTabsBarVisibility()
             updateApplicationShortcuts()
+            
+            // Destroy all tab data
+            tabManager.allTabs.forEach({
+                tabManager.removeAllBrowsingDataForTab($0, completionHandler: { [weak self] in
+                    self?.tabManager.removeAll()
+                })
+            })
+            
+            // Clear all persistent data
+            let clearables: [Clearable] = [
+                HistoryClearable(),
+                CacheClearable(),
+                CookiesAndCacheClearable(),
+                PasswordsClearable(profile: self.profile)
+            ]
+            
+            // Reset tab manager configuration
+            self.tabManager.resetConfiguration()
+            ClearPrivateDataTableViewController.clearPrivateData(clearables).uponQueue(DispatchQueue.main) { _ in
+                
+                // Clear saved tab data
+                TabMO.deleteAllNormalTabs()
+            }
         case Preferences.Shields.blockAdsAndTracking.key,
              Preferences.Shields.httpsEverywhere.key,
              Preferences.Shields.blockScripts.key,
