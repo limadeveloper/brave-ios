@@ -41,6 +41,8 @@ extension Preferences {
         static let blockPopups = Option<Bool>(key: "general.block-popups", default: true)
         /// Controls how the tab bar should be shown (or not shown)
         static let tabBarVisibility = Option<Int>(key: "general.tab-bar-visiblity", default: TabBarVisibility.always.rawValue)
+        /// Controls whether or not media auto-plays
+        static let mediaAutoPlays = Option<Bool>(key: "general.media-auto-plays", default: true)
         
         /// Whether or not a user has enabled Night Mode.
         ///
