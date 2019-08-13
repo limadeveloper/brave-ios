@@ -1092,9 +1092,6 @@ extension TabManager: PreferencesObserver {
             // The default tab configurations also need to change.
             configuration.preferences.javaScriptCanOpenWindowsAutomatically = allowPopups
         case Preferences.General.mediaAutoPlays.key:
-            let allowsMediaAutoPlay = Preferences.General.mediaAutoPlays.value
-            configuration.mediaTypesRequiringUserActionForPlayback = allowsMediaAutoPlay ? [] : .all
-            
             reset()
             reloadSelectedTab()
             for tab in allTabs where tab != selectedTab {
