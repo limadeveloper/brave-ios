@@ -468,6 +468,37 @@ extension URL {
     }
 }
 
+extension URL {
+    public var isBookmarklet: Bool {
+        return self.absoluteString.isBookmarklet
+    }
+    
+    public var bookmarkletCodeComponent: String? {
+        return self.absoluteString.bookmarkletCodeComponent
+    }
+}
+
+extension String {
+    public var isBookmarklet: Bool {
+        let url = self.lowercased()
+        return url.hasPrefix("javascript:") && !url.hasPrefix("javascript:/")
+    }
+    
+    public var bookmarkletCodeComponent: String? {
+        if self.isBookmarklet {
+            return String(self.dropFirst("javascript:".count))
+        }
+        return nil
+    }
+    
+    public var bookmarkletURL: URL? {
+        if let escaped = self.addingPercentEncoding(withAllowedCharacters: .URLAllowed) {
+            return URL(string: escaped)
+        }
+        return nil
+    }
+}
+
 //MARK: Private Helpers
 private extension URL {
     func publicSuffixFromHost( _ host: String, withAdditionalParts additionalPartCount: Int) -> String? {
