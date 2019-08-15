@@ -2952,11 +2952,6 @@ extension BrowserViewController: PreferencesObserver {
             updateTabsBarVisibility()
             updateApplicationShortcuts()
             
-            // Destroy all tab data
-            tabManager.allTabs.forEach({
-                tabManager.removeAllBrowsingDataForTab($0)
-            })
-            
             tabManager.removeAll()
             
             // Clear all persistent data
