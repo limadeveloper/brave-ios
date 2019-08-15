@@ -273,6 +273,16 @@ class SettingsViewController: TableViewController {
                 
                 alert.addAction(UIAlertAction(title: Strings.OKString, style: .default, handler: { _ in
                     Preferences.Privacy.privateBrowsingOnly.value = value
+                    
+                    let clearables: [Clearable] = [
+                        HistoryClearable(),
+                        CacheClearable(),
+                        CookiesAndCacheClearable(),
+                        PasswordsClearable(profile: self.profile)
+                    ]
+                ClearPrivateDataTableViewController.clearPrivateData(clearables).uponQueue(DispatchQueue.main) { _ in
+                        TabMO.deleteAll()
+                    }
                 }))
                 
                 self.present(alert, animated: true, completion: nil)
