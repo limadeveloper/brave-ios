@@ -137,6 +137,7 @@ class BrowserViewController: UIViewController {
     
     let rewards: BraveRewards?
     let rewardsObserver: LedgerObserver?
+    private var notificationsHandler: SystemNotificationsHandler?
     private(set) var publisher: PublisherInfo?
 
     init(profile: Profile, tabManager: TabManager, crashedLastSession: Bool,
@@ -154,10 +155,19 @@ class BrowserViewController: UIViewController {
         RewardsHelper.configureRewardsLogs()
         rewards = BraveRewards(configuration: .default)
         rewardsObserver = LedgerObserver(ledger: rewards!.ledger)
+        notificationsHandler = SystemNotificationsHandler(ads: rewards!.ads)
+        UNUserNotificationCenter.current().delegate = notificationsHandler!
         #endif
 
         super.init(nibName: nil, bundle: nil)
         didInit()
+        
+        #if !NO_REWARDS
+        notificationsHandler?.adTapped = { [weak self] notification in
+            guard let self = self else { return }
+            self.openInNewTab(notification.url, isPrivate: PrivateBrowsingManager.shared.isPrivateBrowsing)
+        }
+        #endif
     }
 
     required init?(coder aDecoder: NSCoder) {
