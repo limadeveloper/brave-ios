@@ -318,6 +318,8 @@ extension BrowserViewController: WKNavigationDelegate {
         tab.url = webView.url
         self.scrollController.resetZoomState()
 
+        rewards?.reportTabNavigation(tabId: tab.rewardsId)
+        
         if tabManager.selectedTab === tab {
             updateUIForReaderHomeStateForTab(tab)
         }
