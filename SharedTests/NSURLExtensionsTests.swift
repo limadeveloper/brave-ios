@@ -528,5 +528,48 @@ class NSURLExtensionsTests: XCTestCase {
         goodurls.forEach { XCTAssertTrue(URL(string:$0)!.isImageResource) }
         badurls.forEach { XCTAssertFalse(URL(string:$0)!.isImageResource) }
     }
+    
+    func testIsBookmarkletURL() {
+        let goodURLs = [
+            "javascript:void(window.close(self))",
+            "javascript:window.open('https://brave.com')"
+        ]
+        
+        let badURLs = [
+            "javascript:",
+            "javascript:/",
+            "javascript://",
+            "javascript://something"
+        ]
+        
+        goodURLs.forEach {
+            XCTAssertNotNil($0.bookmarkletURL)
+        }
+        
+        badURLs.forEach {
+            XCTAssertNil($0.bookmarkletURL)
+        }
+    }
 
+    func testIsBookmarkletURLComponent() {
+        let goodURLs = [
+            "javascript:void(window.close(self))",
+            "javascript:window.open('https://brave.com')"
+        ]
+        
+        let badURLs = [
+            "javascript:",
+            "javascript:/",
+            "javascript://",
+            "javascript://something"
+        ]
+        
+        goodURLs.forEach {
+            XCTAssertNotNil($0.bookmarkletCodeComponent)
+        }
+        
+        badURLs.forEach {
+            XCTAssertNil($0.bookmarkletCodeComponent)
+        }
+    }
 }
