@@ -94,9 +94,30 @@ extension BrowserViewController: RewardsUIDelegate {
     }
     
     func loadNewTabWithURL(_ url: URL) {
+        self.presentedViewController?.dismiss(animated: true)
+        
         let request = URLRequest(url: url)
         let isPrivate = PrivateBrowsingManager.shared.isPrivateBrowsing
         tabManager.addTabAndSelect(request, isPrivate: isPrivate)
+    }
+}
+
+extension Tab {
+    func reportPageLoad(to rewards: BraveRewards) {
+        guard let webView = webView, let url = webView.url else { return }
+        if url.isLocal || PrivateBrowsingManager.shared.isPrivateBrowsing { return }
+        
+        let getHtmlToStringJSCall = "document.documentElement.outerHTML.toString()"
+        // Copy to var, as `shouldClassifyLoadsForAds` can be reset before JS completes
+        let shouldClassify = shouldClassifyLoadsForAds
+        webView.evaluateJavaScript(getHtmlToStringJSCall, completionHandler: { html, _ in
+            guard let htmlString = html as? String else { return }
+            let faviconURL = URL(string: self.displayFavicon?.url ?? "")
+            if faviconURL == nil {
+                log.warning("No favicon found in \(self) to report to rewards panel")
+            }
+            rewards.reportLoadedPage(url: url, faviconUrl: faviconURL, tabId: self.rewardsId, html: htmlString, shouldClassifyForAds: shouldClassify)
+        })
     }
 }
 
