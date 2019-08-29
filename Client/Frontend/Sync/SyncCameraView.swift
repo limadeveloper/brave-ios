@@ -30,7 +30,8 @@ class SyncCameraView: UIView, AVCaptureMetadataOutputObjectsDelegate {
         
         cameraOverlayView = UIImageView(image: UIImage(named: "camera-overlay")?.withRenderingMode(.alwaysTemplate))
         cameraOverlayView.contentMode = .center
-        cameraOverlayView.tintColor = UIColor.white
+        cameraOverlayView.tintColor = .white
+
         addSubview(cameraOverlayView)
         addSubview(cameraAccessButton)
         addSubview(openSettingsButton)

@@ -87,7 +87,11 @@ extension UIColor {
         static let Ink80 = UIColor(rgb: 0x202340)
         static let Ink90 = UIColor(rgb: 0x0f1126)
 
-        static let White100 = UIColor(rgb: 0xffffff)
-
+        static var White100: UIColor {
+            if #available(iOS 13.0, *) {
+                return .systemBackground
+            }
+            return .white
+        }
     }
 }

@@ -50,17 +50,25 @@ class SyncPairWordsViewController: SyncViewController {
         
         containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = UIColor.white
+        containerView.backgroundColor = .white
         containerView.layer.shadowColor = UIColor(rgb: 0xC8C7CC).cgColor
         containerView.layer.shadowRadius = 0
         containerView.layer.shadowOpacity = 1.0
         containerView.layer.shadowOffset = CGSize(width: 0, height: 0.5)
+
+        if #available(iOS 13.0, *) {
+            containerView.backgroundColor = .systemBackground
+        }
+
         scrollView.addSubview(containerView)
+
         
         codewordsView = SyncCodewordsView(data: [])
+
         codewordsView.wordCountChangeCallback = { (count) in
             self.wordCountLabel.text = String(format: Strings.WordCount, count)
         }
+
         containerView.addSubview(codewordsView)
         containerView.addSubview(wordCountLabel)
         containerView.addSubview(copyPasteButton)

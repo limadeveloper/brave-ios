@@ -93,9 +93,13 @@ class SyncAddDeviceViewController: SyncViewController {
 
         containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = UIColor.white
+        containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
+
+        if #available(iOS 13.0, *) {
+            containerView.backgroundColor = .systemBackground
+        }
 
         guard let syncSeed = Sync.shared.syncSeedArray else {
             showInitializationError()

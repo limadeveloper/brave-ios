@@ -8,7 +8,13 @@ import UIKit
 extension PopoverController {
     
     struct PopoverUX {
-        static let backgroundColor: UIColor = .white
+        static var backgroundColor: UIColor {
+            if #available(iOS 13.0, *) {
+                return .systemBackground
+            }
+            return .white
+        }
+
         static let arrowSize = CGSize(width: 14.0, height: 8.0)
         static let cornerRadius: CGFloat = 10.0
         static let shadowOffset = CGSize(width: 0, height: 2.0)

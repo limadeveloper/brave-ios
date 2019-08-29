@@ -36,6 +36,7 @@ class OnboardingViewController: UIViewController {
         static func primaryButton(text: String = Strings.OBContinueButton) -> UIButton {
             let button = RoundInterfaceButton().then {
                 $0.setTitle(text, for: .normal)
+                $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
                 $0.backgroundColor = BraveUX.BraveOrange
                 $0.contentEdgeInsets = UIEdgeInsets(top: 12, left: 25, bottom: 12, right: 25)
             }
@@ -56,7 +57,7 @@ class OnboardingViewController: UIViewController {
         static func primaryText(_ text: String) -> UILabel {
             let label = UILabel().then {
                 $0.text = text
-                $0.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
+                $0.font = .systemFont(ofSize: 16, weight: .bold)
                 $0.textAlignment = .center
             }
             
@@ -66,7 +67,7 @@ class OnboardingViewController: UIViewController {
         static func secondaryText(_ text: String) -> UILabel {
             let label = UILabel().then {
                 $0.text = text
-                $0.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
+                $0.font = .systemFont(ofSize: 16, weight: .regular)
                 $0.textAlignment = .center
                 $0.numberOfLines = 0
             }

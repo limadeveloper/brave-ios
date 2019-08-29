@@ -137,8 +137,12 @@ class PopupView: UIView, UIGestureRecognizerDelegate {
         dialogView = UIView(frame: CGRect.zero)
         dialogView.clipsToBounds = true
         dialogView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleBottomMargin]
-        dialogView.backgroundColor = UIColor.white
-        
+        dialogView.backgroundColor = .white
+
+        if #available(iOS 13.0, *) {
+            dialogView.backgroundColor = .systemBackground
+        }
+
         setStyle(popupStyle: .dialog)
         
         KeyboardHelper.defaultHelper.addDelegate(self)

@@ -24,6 +24,11 @@ class AddEditHeaderView: UIView {
         super.init(frame: frame)
         
         backgroundColor = .white
+
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        }
+
         addSubview(mainStackView)
         
         mainStackView.snp.makeConstraints {

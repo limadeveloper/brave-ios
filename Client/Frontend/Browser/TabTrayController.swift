@@ -1130,7 +1130,13 @@ class TrayToolbar: UIView {
 
     fileprivate override init(frame: CGRect) {
         super.init(frame: frame)
+
         backgroundColor = .white
+
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        }
+
         addSubview(addTabButton)
         addSubview(doneButton)
 

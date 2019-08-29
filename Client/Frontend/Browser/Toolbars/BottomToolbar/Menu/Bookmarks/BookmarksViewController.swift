@@ -221,6 +221,10 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
     cell.textLabel?.lineBreakMode = .byTruncatingTail
     
     cell.contentView.backgroundColor = .white
+
+    if #available(iOS 13.0, *) {
+        cell.contentView.backgroundColor = .systemBackground
+    }
     
     if !item.isFolder {
       configCell(icon: item.domain?.favicon)

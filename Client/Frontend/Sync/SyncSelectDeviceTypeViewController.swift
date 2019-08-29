@@ -40,7 +40,11 @@ class SyncDeviceTypeButton: UIControl {
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 1)
-        
+
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        }
+
         imageView.image = UIImage(named: image)
         imageView.contentMode = .center
         imageView.tintColor = BraveUX.GreyJ

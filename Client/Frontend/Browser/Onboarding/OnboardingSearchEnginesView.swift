@@ -20,8 +20,20 @@ extension OnboardingSearchEnginesViewController {
             static let rowHeight: CGFloat = 54
             static let imageSize: CGFloat = 32
             static let cornerRadius: CGFloat = 8
-            static let selectedBackgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9450980392, blue: 1, alpha: 1)
-            static let deselectedBackgroundColor: UIColor = .white
+
+            static var selectedBackgroundColor: UIColor {
+                if #available(iOS 13.0, *) {
+                    return .tertiarySystemGroupedBackground
+                }
+                return #colorLiteral(red: 0.9411764706, green: 0.9450980392, blue: 1, alpha: 1)
+            }
+
+            static var deselectedBackgroundColor: UIColor {
+                if #available(iOS 13.0, *) {
+                    return .secondarySystemGroupedBackground
+                }
+                return .white
+            }
         }
     }
     
@@ -54,11 +66,11 @@ extension OnboardingSearchEnginesViewController {
         }
         
         let titlePrimary = CommonViews.primaryText(Strings.OBSearchEngineTitle).then {
-            $0.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.semibold)
+            $0.font = .systemFont(ofSize: 20, weight: .semibold)
         }
         
         let titleSecondary = CommonViews.secondaryText(Strings.OBSearchEngineDetail).then {
-            $0.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+            $0.font = .systemFont(ofSize: 16, weight: .medium)
         }
         
         private let titleStackView = UIStackView().then { stackView in
@@ -74,7 +86,12 @@ extension OnboardingSearchEnginesViewController {
         
         init() {
             super.init(frame: .zero)
+
             backgroundColor = .white
+
+            if #available(iOS 13.0, *) {
+                backgroundColor = .systemBackground
+            }
             
             addSubview(braveLogo)
             
@@ -203,7 +220,7 @@ extension OnboardingSearchEnginesViewController {
             backgroundColor = selected ?
                 UX.SearchEngineCell.selectedBackgroundColor : UX.SearchEngineCell.deselectedBackgroundColor
             
-            textLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+            textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         }
         
         override func layoutSubviews() {

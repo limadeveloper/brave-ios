@@ -40,6 +40,11 @@ extension OnboardingShieldsViewController {
         
         private let descriptionView = UIView().then {
             $0.backgroundColor = .white
+
+            if #available(iOS 13.0, *) {
+                $0.backgroundColor = .systemBackground
+            }
+
             $0.layer.cornerRadius = 12
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
@@ -107,7 +112,7 @@ private extension String {
         if let firstWord = self.components(separatedBy: " ").first {
             if let range = self.range(of: firstWord) {
                 let nsRange = NSRange(range, in: self)
-                let font = UIFont.systemFont(ofSize: font.pointSize, weight: UIFont.Weight.bold)
+                let font = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
                 
                 mutableDescriptionText.addAttribute(NSAttributedString.Key.font, value: font, range: nsRange)
             }

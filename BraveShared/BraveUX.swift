@@ -21,7 +21,13 @@ public struct BraveUX {
     public static let Green = UIColor(rgb: 0x1bc760)
     public static let Red = UIColor(rgb: 0xE2052A)
     
-    public static let White = UIColor.white
+    public static var White: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        }
+        return .white
+    }
+
     public static let Black = UIColor.black
     
     public static let GreyA = UIColor(rgb: 0xF7F8F9)
@@ -60,7 +66,12 @@ public struct BraveUX {
     
     public static let BrowserViewAlphaWhenShowingTabTray = 0.3
     
-    public static let BackgroundColorForBookmarksHistoryAndTopSites = UIColor.white
+    public static var BackgroundColorForBookmarksHistoryAndTopSites: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+        return .white
+    }
     
     public static let BackgroundColorForTopSitesPrivate = GreyJ
     
@@ -68,7 +79,12 @@ public struct BraveUX {
     
     public static let ColorForSidebarLineSeparators = GreyB
     
-    public static let PopupDialogColorLight = UIColor.white
+    public static var PopupDialogColorLight: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+        return .white
+    }
     
     // debug settings
     //  static var IsToolbarHidingOff = false
@@ -80,7 +96,12 @@ public struct BraveUX {
     public static let BackForwardDisabledButtonAlpha = CGFloat(0.3)
     public static let BackForwardEnabledButtonAlpha = CGFloat(1.0)
     
-    public static let TopLevelBackgroundColor = UIColor.white
+    public static var TopLevelBackgroundColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+        return .white
+    }
     
     // LocationBar Coloring
     public static let LocationBarTextColor = GreyJ
@@ -131,7 +152,13 @@ public struct BraveUX {
     public static let ProgressBarDarkColor = GreyI
     
     public static let TabTrayCellCornerRadius = CGFloat(6.0)
-    public static let TabTrayCellBackgroundColor = UIColor.white
+
+    public static var TabTrayCellBackgroundColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        }
+        return .white
+    }
     
     /** Determines how fast the swipe needs to be to trigger navigation action(go back/go forward).
      To determine its value, see `UIPanGestureRecognizer.velocity()` */

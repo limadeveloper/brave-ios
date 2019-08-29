@@ -20,8 +20,14 @@ struct UX {
     
     struct HomePanel {
         static let BackgroundColorPBM = GreyJ
-        static let BackgroundColor = UIColor.white
         static let StatTitleColor = GreyF
+
+        static var BackgroundColor: UIColor {
+            if #available(iOS 13.0, *) {
+                return .systemBackground
+            }
+            return .white
+        }
     }
     
     struct Favorites {
@@ -37,7 +43,13 @@ struct UX {
     static let Green = UIColor(rgb: 0x1bc760)
     static let Red = UIColor(rgb: 0xE2052A)
     
-    static let White = UIColor.white
+    static var White: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+        return .white
+    }
+
     static let Black = UIColor.black
     
     static let GreyA = UIColor(rgb: 0xF7F8F9)

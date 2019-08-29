@@ -116,7 +116,13 @@ public struct UIConstants {
     static let DefaultChromeSmallFontBold = UIFont.boldSystemFont(ofSize: DefaultChromeSmallSize)
     static let PasscodeEntryFont = UIFont.systemFont(ofSize: PasscodeEntryFontSize, weight: UIFont.Weight.bold)
 
-    static let PanelBackgroundColor = UIColor.white
+    static var PanelBackgroundColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+        return .white
+    }
+
     static let SeparatorColor = UIColor.Photon.Grey30
     static let HighlightBlue = UIColor.Photon.Blue50
     static let DestructiveRed = UIColor.Photon.Red50

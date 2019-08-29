@@ -66,6 +66,10 @@ class FindInPageBar: UIView {
 
         backgroundColor = .white
 
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        }
+
         searchText.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
         searchText.textColor = FindInPageUX.SearchTextColor
         searchText.font = FindInPageUX.SearchTextFont

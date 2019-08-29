@@ -30,12 +30,12 @@ class FavoritesViewController: UIViewController, Themeable {
     private (set) internal lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 6
+        layout.minimumLineSpacing = 2
         
         let view = UICollectionView(frame: self.view.frame, collectionViewLayout: layout).then {
             $0.backgroundColor = .clear
             $0.delegate = self
-        
+
             let cellIdentifier = FavoriteCell.identifier
             $0.register(FavoriteCell.self, forCellWithReuseIdentifier: cellIdentifier)
             $0.keyboardDismissMode = .onDrag
@@ -46,9 +46,10 @@ class FavoritesViewController: UIViewController, Themeable {
         }
         return view
     }()
+
     private let dataSource: FavoritesDataSource
     
-    private let braveShieldStatsView = BraveShieldStatsView(frame: CGRect.zero).then {
+    private let braveShieldStatsView = BraveShieldStatsView(frame: .zero).then {
         $0.autoresizingMask = [.flexibleWidth]
     }
     
@@ -57,7 +58,7 @@ class FavoritesViewController: UIViewController, Themeable {
     private let ddgLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.textColor = BraveUX.GreyD
-        $0.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
         $0.text = Strings.DDG_promotion
     }
     
@@ -253,9 +254,15 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
         guard let favoriteCell = cell as? FavoriteCell else { return }
         favoriteCell.delegate = self
+
+        if #available(iOS 13.0, *) {
+            favoriteCell.backgroundColor = .secondarySystemGroupedBackground
+        }
     }
     
     fileprivate var columnsPerRow: Int {

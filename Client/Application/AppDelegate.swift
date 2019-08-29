@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
     /// Object used to handle server pings
     let dau = DAU()
 
-    @discardableResult func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    @discardableResult func application(_ application: UIApplication,
+                                        willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //
         // Determine if the application cleanly exited last time it was used. We default to true in
         // case we have never done this before. Then check if the "ApplicationCleanlyBackgrounded" user
@@ -58,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         self.launchOptions = launchOptions
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.backgroundColor = UIColor.Photon.White100
+        self.window?.backgroundColor = UIColor.Photon.White100
 
         AdBlockStats.shared.startLoading()
         
@@ -87,7 +88,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         }
     }
 
-    @discardableResult fileprivate func startApplication(_ application: UIApplication, withLaunchOptions launchOptions: [AnyHashable: Any]?) -> Bool {
+    @discardableResult fileprivate func startApplication(_ application: UIApplication,
+                                                         withLaunchOptions launchOptions: [AnyHashable: Any]?) -> Bool {
         log.info("startApplication begin")
         
         // Set the Firefox UA for browsing.
@@ -150,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         navigationController.edgesForExtendedLayout = UIRectEdge(rawValue: 0)
         rootViewController = navigationController
 
-        self.window!.rootViewController = rootViewController
+        self.window?.rootViewController = rootViewController
 
         self.updateAuthenticationInfo()
         SystemUtils.onFirstRun()
@@ -212,11 +214,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         UIScrollView.doBadSwizzleStuff()
 
         #if BUDDYBUILD
-            print("Setting up BuddyBuild SDK")
-            BuddyBuildSDK.setup()
+        print("Setting up BuddyBuild SDK")
+        BuddyBuildSDK.setup()
         #endif
         
-        window!.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
         
         authenticator = AppAuthenticator(protectedWindow: window!, promptImmediately: true, isPasscodeEntryCancellable: false)
 
@@ -267,12 +269,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         AdblockResourceDownloader.shared.startLoading()
 
         UINavigationBar.appearance().tintColor = BraveUX.BraveOrange
-      
+
         (UISwitch.appearance() as UISwitch).do {
             $0.tintColor = BraveUX.SwitchTintColor
             $0.onTintColor = BraveUX.BraveOrange
         }
-      
+
         return shouldPerformAdditionalDelegateHandling
     }
 
@@ -332,7 +334,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         guard let profile = self.profile else {
             return
         }
-      
+
         // BRAVE TODO: Decide whether or not we want to use this for our own sync down the road
 
         var taskId: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
@@ -342,15 +344,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
             application.endBackgroundTask(taskId)
         })
 
-//        if profile.hasSyncableAccount() {
-//            profile.syncManager.syncEverything(why: .backgrounded).uponQueue(.main) { _ in
-//                self.shutdownProfileWhenNotActive(application)
-//                application.endBackgroundTask(taskId)
-//            }
-//        } else {
-            profile.shutdown()
-            application.endBackgroundTask(taskId)
-//        }
+        //        if profile.hasSyncableAccount() {
+        //            profile.syncManager.syncEverything(why: .backgrounded).uponQueue(.main) { _ in
+        //                self.shutdownProfileWhenNotActive(application)
+        //                application.endBackgroundTask(taskId)
+        //            }
+        //        } else {
+        profile.shutdown()
+        application.endBackgroundTask(taskId)
+        //        }
     }
 
     fileprivate func shutdownProfileWhenNotActive(_ application: UIApplication) {
